@@ -29,12 +29,13 @@ export default function HomePage() {
 
   const createTripMutation = useMutation({
     mutationFn: async (destination: string) => {
-      return apiRequest<Trip>("POST", "/api/trips", {
+      const res = await apiRequest("POST", "/api/trips", {
         destination,
         destinationType: "other",
         safeRouteEnabled: true,
         totalSteps: 5,
       });
+      return res.json() as Promise<Trip>;
     },
     onSuccess: (trip) => {
       queryClient.invalidateQueries({ queryKey: ['/api/trips'] });

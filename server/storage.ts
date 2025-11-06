@@ -153,8 +153,10 @@ export class MemStorage implements IStorage {
   async createTrip(insertTrip: InsertTrip): Promise<Trip> {
     const id = randomUUID();
     const trip: Trip = {
-      ...insertTrip,
       id,
+      destination: insertTrip.destination,
+      destinationType: insertTrip.destinationType,
+      safeRouteEnabled: insertTrip.safeRouteEnabled ?? true,
       startTime: new Date(),
       endTime: null,
       status: "in_progress",
@@ -243,7 +245,14 @@ export class MemStorage implements IStorage {
     insertContact: InsertFamilyContact
   ): Promise<FamilyContact> {
     const id = randomUUID();
-    const contact: FamilyContact = { ...insertContact, id };
+    const contact: FamilyContact = {
+      id,
+      name: insertContact.name,
+      phoneNumber: insertContact.phoneNumber,
+      relationship: insertContact.relationship,
+      isPrimary: insertContact.isPrimary ?? false,
+      familyLinkEnabled: insertContact.familyLinkEnabled ?? false,
+    };
     this.familyContacts.set(id, contact);
     return contact;
   }
@@ -296,8 +305,11 @@ export class MemStorage implements IStorage {
   ): Promise<Destination> {
     const id = randomUUID();
     const destination: Destination = {
-      ...insertDestination,
       id,
+      name: insertDestination.name,
+      address: insertDestination.address,
+      type: insertDestination.type,
+      isFavorite: insertDestination.isFavorite ?? false,
       visitCount: 0,
       lastVisited: null,
     };
