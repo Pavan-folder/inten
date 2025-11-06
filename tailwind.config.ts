@@ -5,7 +5,21 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontSize: {
+        'base': '1.25rem', // 20px - larger base for elderly users
+        'lg': '1.375rem', // 22px
+        'xl': '1.5rem', // 24px
+        '2xl': '2rem', // 32px
+        '3xl': '2.5rem', // 40px
+      },
+      spacing: {
+        '14': '3.5rem', // 56px - minimum touch target
+        '18': '4.5rem', // 72px
+        '20': '5rem', // 80px - large buttons
+      },
       borderRadius: {
+        'xl': '0.75rem', // 12px
+        '2xl': '1rem', // 16px
         lg: ".5625rem", /* 9px */
         md: ".375rem", /* 6px */
         sm: ".1875rem", /* 3px */
